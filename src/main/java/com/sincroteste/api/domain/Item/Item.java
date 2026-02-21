@@ -5,7 +5,7 @@ import com.sincroteste.api.domain.Categoria.Categoria;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Item")
+@Table(name = "tbl_item")
 public class Item {
 
     @Id
@@ -58,4 +58,7 @@ public class Item {
 
     public Categoria getCategoria() { return categoria; }
     public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+
+    public static record ItemRequestDTO() {
+    }
 }

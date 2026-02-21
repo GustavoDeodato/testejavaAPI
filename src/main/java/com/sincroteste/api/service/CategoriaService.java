@@ -18,5 +18,30 @@ public class CategoriaService {
         return repository.save(newCategoria);
     }
 
+    public java.util.List<Categoria> getAllCategorias(){
+        return repository.findAll();
+    }
+    public Categoria getbyidCategorias(Integer id){
+        return repository.findById(id).orElse(null);
+    }
+
+    public boolean deleteCategoria(Integer id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public Categoria updateCategoria(Integer id, CategoriaRequestDTO data){
+        Categoria categoria = repository.findById(id).orElse(null);
+        if(categoria != null){
+            categoria.setNome(data.nome());
+            categoria.setDescricao(data.descricao());
+            return repository.save(categoria);
+        }
+        return null;
+    }
+
 }
 

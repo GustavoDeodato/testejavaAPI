@@ -2,7 +2,7 @@ package com.sincroteste.api.domain.Categoria;
 
 import jakarta.persistence.*;
 
-@Table(name = "categoria") //mapeando pa sabe que é uma tabela
+@Table(name = "tbl_categoria") //mapeando pa sabe que é uma tabela
 @Entity //deixando claro que é uma entidade
 public class Categoria {
 
