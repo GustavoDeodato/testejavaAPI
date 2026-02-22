@@ -32,6 +32,9 @@ public class ItemService {
         return repository.findAll();
 
     }
+    public java.util.List<Item> getItemsByCategoria(Integer categoriaId){
+        return repository.findByCategoriaId(categoriaId);
+    }
     public Item getbyidItems(Integer id){
         return repository.findById(id).orElse(null);
     }
@@ -57,9 +60,7 @@ public class ItemService {
         }
         return null;
     }
-    public java.util.List<Item> getItemsByCategoria(Integer categoriaId){
-        return repository.findByCategoriaId(categoriaId);
-    }
+
 
 
 

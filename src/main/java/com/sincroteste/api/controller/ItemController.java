@@ -25,7 +25,11 @@ public class ItemController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<Item>>getAll(){
+    public ResponseEntity<List<Item>>getAll(@RequestParam(required = false) Integer categoriaId){
+        if(categoriaId != null){
+            List<Item> items = this.itemService.getItemsByCategoria(categoriaId);
+            return ResponseEntity.status(200).body(items);
+        }
         List<Item> Items = this.itemService.getAllItems();
         return ResponseEntity.status(200).body(Items);
     }
@@ -55,9 +59,5 @@ public class ItemController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
-    @GetMapping("/items/categoriaId/{categoria_id}")
-    public ResponseEntity<List<Item>> getByCategoria(@PathVariable Integer categoriaId){
-        List<Item> items = this.itemService.getItemsByCategoria(categoriaId);
-        return ResponseEntity.status(200).body(items);
-    }
+
 }
