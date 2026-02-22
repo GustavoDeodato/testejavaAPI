@@ -5,6 +5,7 @@ import com.sincroteste.api.domain.Categoria.CategoriaRequestDTO;
 import com.sincroteste.api.service.CategoriaService;
 import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody CategoriaRequestDTO body){
         try{
             Categoria newCategoria  = this.categoriaService.createCategoria(body);

@@ -2,6 +2,7 @@ package com.sincroteste.api.domain.Categoria;
 
 import jakarta.persistence.*;
 
+
 @Table(name = "tbl_categoria") //mapeando pa sabe que é uma tabela
 @Entity //deixando claro que é uma entidade
 public class Categoria {
@@ -19,6 +20,10 @@ public class Categoria {
     }
 
     public Categoria(Integer id, String nome, String descricao) {
+        if (nome == null || nome.isEmpty() || nome.length() > 100 ||
+            descricao == null || descricao.isEmpty()) {
+            throw new IllegalArgumentException("Dados inválidos");
+        }
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -41,10 +46,16 @@ public class Categoria {
 
     //setters
     public void setDescricao(String descricao) {
+        if (descricao == null || descricao.isEmpty()) {
+            throw new IllegalArgumentException("Descrição inválida");
+        }
         this.descricao = descricao;
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.isEmpty() || nome.length() > 100) {
+            throw new IllegalArgumentException("Nome inválido");
+        }
         this.nome = nome;
     }
 

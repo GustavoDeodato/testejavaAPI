@@ -35,6 +35,31 @@ public class ItemService {
     public Item getbyidItems(Integer id){
         return repository.findById(id).orElse(null);
     }
+    public boolean deleteItem(Integer id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+    public Item updateItem(Integer id, ItemRequestDTO data){
+        Item item = repository.findById(id).orElse(null);
+        Categoria categoria = categoriaRepository.findById(data.categoriaId())
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+        if(item != null){
+            item.setNome(data.nome());
+            item.setSku(data.sku());
+            item.setQuantidade(data.quantidade());
+            item.setPreco(data.preco());
+            item.setStatus(data.status());
+            item.setCategoria(categoria);
+            return repository.save(item);
+        }
+        return null;
+    }
+    public java.util.List<Item> getItemsByCategoria(Integer categoriaId){
+        return repository.findByCategoriaId(categoriaId);
+    }
 
 
 
