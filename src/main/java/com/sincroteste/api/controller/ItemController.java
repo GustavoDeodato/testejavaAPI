@@ -19,7 +19,7 @@ public class ItemController {
     public ResponseEntity<?> create(@RequestBody ItemRequestDTO body){
         try {
             Item newItem = itemService.createItem(body);
-            return ResponseEntity.status(200).body(newItem);
+            return ResponseEntity.status(201).body(newItem);
         }catch (Exception e){
             return ResponseEntity.status(400).body(e.getMessage());
         }
