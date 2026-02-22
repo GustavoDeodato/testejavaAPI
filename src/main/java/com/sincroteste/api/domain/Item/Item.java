@@ -19,7 +19,7 @@ public class Item {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "categoriaId")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Item(){
