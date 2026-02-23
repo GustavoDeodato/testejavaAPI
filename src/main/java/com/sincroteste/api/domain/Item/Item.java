@@ -19,8 +19,13 @@ public class Item {
     private double preco;
     private String status;
     
-    @Column(name = "data_criacao")
+    @Column(name = "data_criacao", updatable = false)
     private LocalDateTime dataCriacao;
+
+    @PrePersist
+    protected void onCreate() {
+        dataCriacao = LocalDateTime.now();
+    }
     
     private String localizacao;
 

@@ -7,6 +7,7 @@ import com.sincroteste.api.repositories.CategoriaRepositories;
 import com.sincroteste.api.repositories.ItemRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 @Service
 public class ItemService {
@@ -25,6 +26,7 @@ public class ItemService {
         newItem.setQuantidade(data.quantidade());
         newItem.setPreco(data.preco());
         newItem.setStatus(data.status());
+        newItem.setDataCriacao(LocalDateTime.now());
         newItem.setLocalizacao(data.localizacao());
         newItem.setCategoria(categoria);
         return repository.save(newItem);
