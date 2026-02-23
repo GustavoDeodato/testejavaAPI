@@ -5,9 +5,10 @@ create table tbl_item(
 	quantidade int not null,
 	preco decimal(10, 2) not null,
 	status varchar(20),
+	data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	localizacao varchar(100),
 	categoria_id int not null,
 	constraint fk_categoria foreign key (categoria_id) references tbl_categoria(id)
 	on delete cascade
 
-
-);
+	);

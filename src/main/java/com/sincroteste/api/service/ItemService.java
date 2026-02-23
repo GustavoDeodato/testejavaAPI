@@ -25,6 +25,7 @@ public class ItemService {
         newItem.setQuantidade(data.quantidade());
         newItem.setPreco(data.preco());
         newItem.setStatus(data.status());
+        newItem.setLocalizacao(data.localizacao());
         newItem.setCategoria(categoria);
         return repository.save(newItem);
     }
@@ -55,6 +56,7 @@ public class ItemService {
             item.setQuantidade(data.quantidade());
             item.setPreco(data.preco());
             item.setStatus(data.status());
+            item.setLocalizacao(data.localizacao());
             item.setCategoria(categoria);
             return repository.save(item);
         }

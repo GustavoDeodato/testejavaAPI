@@ -3,6 +3,7 @@ package com.sincroteste.api.domain.Item;
 
 import com.sincroteste.api.domain.Categoria.Categoria;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_item")
@@ -17,6 +18,11 @@ public class Item {
     private int quantidade;
     private double preco;
     private String status;
+    
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
+    
+    private String localizacao;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -25,12 +31,13 @@ public class Item {
     public Item(){
 
     }
-    public Item(Integer id, String nome, String sku, int quantidade, double preco, String status, Categoria categoria) {
+    public Item(Integer id, String nome, String sku, int quantidade, double preco, String status, LocalDateTime dataCriacao, String localizacao, Categoria categoria) {
         if (nome == null || nome.isEmpty() || nome.length() > 100 ||
             sku == null || sku.isEmpty() || sku.length() > 50 ||
             quantidade < 0 ||
             preco < 0.0 ||
             (status != null && status.length() > 20) ||
+            (localizacao != null && localizacao.length() > 100) ||
             categoria == null) {
             throw new IllegalArgumentException("Dados inválidos");
         }
@@ -41,6 +48,8 @@ public class Item {
         this.quantidade = quantidade;
         this.preco = preco;
         this.status = status;
+        this.dataCriacao = dataCriacao;
+        this.localizacao = localizacao;
         this.categoria = categoria;
     }
 
@@ -96,6 +105,19 @@ public class Item {
             throw new IllegalArgumentException("Categoria inválida");
         }
         this.categoria = categoria;
+    }
+
+    public LocalDateTime getDataCriacao() { return dataCriacao; }
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public String getLocalizacao() { return localizacao; }
+    public void setLocalizacao(String localizacao) {
+        if (localizacao != null && localizacao.length() > 100) {
+            throw new IllegalArgumentException("Localização inválida");
+        }
+        this.localizacao = localizacao;
     }
 
     public static record ItemRequestDTO() {
